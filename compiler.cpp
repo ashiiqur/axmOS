@@ -5,25 +5,37 @@
 using namespace std;
 
 int main() {
-    cout << "--- axmOS Shell Compiler v0.1 ---" << endl;
-    cout << "Bhasha (Language): Assamese" << endl << endl;
+    cout << "--- axmOS Shell v0.2 ---" << endl;
+    cout << "Bhasha: Assamese" << endl;
+    cout << "Type 'bondho' to exit." << endl << endl;
 
-    string axmos_code = "dekha axmOS_Nirman_Arambho;"; 
-    
-    cout << "Reading code: " << axmos_code << endl;
-    cout << "Analyzing..." << endl;
-    cout << "-----------------------------------" << endl;
+    string axmos_code;
 
-    stringstream ss(axmos_code);
-    string word;
-    
-    while (ss >> word) {
-        if (word == "dekha") {
-            cout << "[Nirdesh/Command]: Screen-ot dekhaba (Print command found)" << endl;
-        } else if (word == "axmOS_Nirman_Arambho;") {
-            cout << "[Tothyo/Data]: 'axmOS_Nirman_Arambho'" << endl;
-        } else {
-            cout << "[Bhul/Error]: Ei shobdoto buji napalo (Unknown word): " << word << endl;
+    // The REPL Loop:
+    while (true) {
+        cout << "axmOS> ";
+        getline(cin, axmos_code); 
+
+        if (axmos_code == "bondho") {
+            cout << "axmOS bondho kori ase... (Shutting down axmOS)" << endl;
+            break; 
+        }
+
+        stringstream ss(axmos_code);
+        string command;
+        string data;
+
+        if (ss >> command) {
+            if (command == "dekha") {
+                
+                if (ss >> data) {
+                    cout << data << endl;
+                } else {
+                    cout << "[Bhul/Error]: Ki dekhabo? (What should I show?)" << endl;
+                }
+            } else {
+                cout << "[Bhul/Error]: Ei nirdesh buji napalo (Unknown command): " << command << endl;
+            }
         }
     }
 
